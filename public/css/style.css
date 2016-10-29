@@ -1,0 +1,12 @@
+#barChart {
+	width: 1250px;
+	height: 500px;
+	border: solid black;
+}
+
+#barChart > div {
+	margin-top: 5px;
+	height: 30px;
+	color: white;
+	text-align: end;
+}

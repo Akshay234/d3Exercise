@@ -1,0 +1,13 @@
+.box {
+    display: inline-block;
+    margin: 3px;
+    text-align: center;
+    vertical-align: top;
+    border: solid 1px lightgrey;
+}
+
+.box > text{
+    font-family: serif;
+    font-style: italic;
+    font-weight: bold;
+}

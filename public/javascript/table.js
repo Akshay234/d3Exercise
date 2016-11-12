@@ -1,9 +1,9 @@
 var scales = [
-  {scale: d3.scaleLinear(), row: 'tHead', division: 'Title'},
-  {scale: d3.scaleLinear(), row: 'tBody', division: 'n'},
-  {scale: d3.scalePow().exponent(2), row: 'tBody', division: 'n square'},
-  {scale: d3.scaleLog(), row: 'tBody', division: 'log(n)'},
-  {scale: d3.scaleLog().interpolate(d3.interpolateRound), row: 'tBody', division: 'log(n) rounded'}
+  {scale: d3.scaleLinear(), division: 'Title'},
+  {scale: d3.scaleLinear(), division: 'n'},
+  {scale: d3.scalePow().exponent(2), division: 'n square'},
+  {scale: d3.scaleLog(), division: 'log(n)'},
+  {scale: d3.scaleLog().interpolate(d3.interpolateRound), division: 'log(n) rounded'}
 ];
 
 var generateBody = function (scale, numbers) {

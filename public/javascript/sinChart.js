@@ -57,13 +57,24 @@ var createChart = function () {
 
 
   g.append('path').classed('line', true).attr('d', line(data));
+  drawDots(g, data, xScale, yScale);
 
   var sinData = data.map(function(v, index){
     return {x: v.x, y: Math.sin(index)+5};
   });
 
   g.append('path').classed('line', true).attr('d', line(sinData));
+  drawDots(g, sinData, xScale, yScale);
+};
 
+var drawDots = function (svg, data, x, y) {
+  svg.selectAll('dot')
+    .data(data)
+    .enter().append('circle')
+    .classed('dot', true)
+    .attr('r', 4)
+    .attr('cx', function(d) { return x(d.x/10); })
+    .attr('cy', function(d) { return y(d.y/10); });
 };
 
 window.onload = createChart;

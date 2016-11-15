@@ -1,0 +1,23 @@
+#line {
+    stroke: grey;
+}
+
+#line, #circle, #square, #triangle {
+    fill: none;
+    stroke-width: 2px;
+}
+
+#circle {
+    stroke: red;
+}
+
+#square {
+    stroke: steelblue;
+}
+
+#triangle {
+    stroke: green;
+}
+svg {
+    width: 100%;
+}

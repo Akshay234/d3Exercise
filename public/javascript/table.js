@@ -30,7 +30,7 @@ function generateHeading(numbers) {
     });
 }
 
-var execute = function () {
+var generateTable = function () {
   var numbers = [5, 4, 8, 2, 8, 4, 8, 7, 3, 6];
   generateHeading([scales[0].division, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
   for (var i = 1; i < scales.length; i++) {
@@ -38,5 +38,5 @@ var execute = function () {
   }
 };
 
-window.onload = execute;
+window.onload = generateTable;
 

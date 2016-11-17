@@ -39,7 +39,7 @@ var generateBars = function (data) {
 };
 
 
-var execute = function () {
+var generateSvgBarChart = function () {
   var data = randomNumbers();
   setInterval(function () {
     var value = Math.round(Math.random() * LIMIT);
@@ -50,4 +50,4 @@ var execute = function () {
 };
 
 
-window.onload = execute;
+window.onload = generateSvgBarChart;

@@ -1,4 +1,4 @@
-var generateChart = function () {
+var generateNumberExpansionChart = function () {
   var data = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   var font = fontStyleScale();
@@ -26,4 +26,4 @@ var widthSizeScale = function () {
   return d3.scaleLinear().domain([0, 10]).range([30, 130]);
 };
 
-window.onload = generateChart();
+window.onload = generateNumberExpansionChart();

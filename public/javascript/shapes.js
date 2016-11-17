@@ -56,7 +56,7 @@ var triangle = function (svg, startPoint) {
     .attr('id', 'triangle');
 };
 
-var execute = function () {
+var generateShapes = function () {
   var data = {
     line: line,
     circle: circle,
@@ -67,5 +67,5 @@ var execute = function () {
 };
 
 
-window.onload = execute;
+window.onload = generateShapes;
 

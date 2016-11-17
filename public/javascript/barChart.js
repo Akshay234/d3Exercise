@@ -30,7 +30,7 @@ function updateBars(container, value) {
   container.removeChild(container.firstChild);
   container.appendChild(createDiv(value));
 }
-var execute = function () {
+var generateDivBarChart = function () {
   var container = document.getElementById('barChart');
   generateBars(container, randomNumbers());
   setInterval(function () {
@@ -39,4 +39,4 @@ var execute = function () {
   }, 1000);
 };
 
-window.onload = execute;
+window.onload = generateDivBarChart;

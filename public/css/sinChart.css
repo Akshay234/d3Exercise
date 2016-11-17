@@ -1,7 +1,7 @@
 .line {
     fill: none;
-    stroke: steelblue;
-    stroke-width: 2px;
+    stroke: brown;
+    stroke-width: 3px;
 }
 
 .dot {
@@ -9,3 +9,8 @@
     stroke: steelblue;
 }
 
+.sinLine {
+    fill: none;
+    stroke: steelblue;
+    stroke-width: 3px;
+}

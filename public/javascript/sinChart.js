@@ -5,23 +5,24 @@ const MARGIN = 30;
 const INNER_WIDTH = WIDTH - 2 * MARGIN;
 const INNER_HEIGHT = HEIGHT - 2 * MARGIN;
 
+var data =  [
+  {x: 0, y: 5},
+  {x: 1, y: 9},
+  {x: 2, y: 7},
+  {x: 3, y: 5},
+  {x: 4, y: 3},
+  {x: 5, y: 3.5},
+  {x: 6, y: 4},
+  {x: 7, y: 2},
+  {x: 8, y: 3},
+  {x: 9, y: 2}
+];
+
 var translate = function(x, y){
   return 'translate('+x+','+y+')';
 };
 
-var createChart = function () {
-  var data =  [
-    {x: 0, y: 5},
-    {x: 1, y: 9},
-    {x: 2, y: 7},
-    {x: 3, y: 5},
-    {x: 4, y: 3},
-    {x: 5, y: 3.5},
-    {x: 6, y: 4},
-    {x: 7, y: 2},
-    {x: 8, y: 3},
-    {x: 9, y: 2}
-  ];
+var generateSinChart = function (interpolate) {
   var chart = d3.select('.container').append('svg')
     .attr('width', WIDTH)
     .attr('height', HEIGHT);
@@ -51,20 +52,23 @@ var createChart = function () {
   var g = chart.append('g')
     .attr('transform',  translate(MARGIN, MARGIN));
 
-  var line = d3.line()
+  var line =  d3.line()
+    .curve(interpolate)
     .x(function(d){return xScale(d.x/10)})
     .y(function(d){return yScale(d.y/10)});
 
-
   g.append('path').classed('line', true).attr('d', line(data));
+
   drawDots(g, data, xScale, yScale);
 
   var sinData = data.map(function(v, index){
     return {x: v.x, y: Math.sin(index)+5};
   });
-
-  g.append('path').classed('line', true).attr('d', line(sinData));
+  g.append('path').classed('sinLine', true).attr('d', line(sinData));
   drawDots(g, sinData, xScale, yScale);
+};
+
+var createLine = function (interpolate) {
 };
 
 var drawDots = function (svg, data, x, y) {
@@ -77,4 +81,25 @@ var drawDots = function (svg, data, x, y) {
     .attr('cy', function(d) { return y(d.y/10); });
 };
 
-window.onload = createChart;
+var execute = function () {
+  generateSinChart(d3.curveLinear);
+};
+
+window.onload = execute;
+
+
+// d3.select("#interpolate")
+//   .on("change", change)
+//   .selectAll("option")
+//   .data([
+//     "linear",
+//     "step-before",
+//     "step-after",
+//     "basis",
+//     "basis-open",
+//     "basis-closed",
+//     "cardinal",
+//     "cardinal-open",
+//     "cardinal-closed",
+//     "monotone"
+//   ])

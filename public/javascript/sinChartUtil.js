@@ -35,12 +35,26 @@ Chart.prototype.createDots = function (group,data) {
     });
 };
 
+Chart.prototype.createArea = function (options) {
+  var self = this;
+  var domain = this.domain;
+  var areaGroup = options.chart.append('g')
+    .attr('transform',  self.translate(MARGIN, MARGIN));
+
+  var area = d3.area()
+    .x(function(d) { return self.xScale(self.calculateValue(d.x, domain.x)); })
+    .y1(function(d) { return self.yScale(self.calculateValue(d.y, domain.y)); })
+    .y0(INNER_HEIGHT);
+
+    areaGroup.append('path').attr('id', 'area').attr('d', area(options.data));
+};
+
 Chart.prototype.createLine = function (options) {
   var self = this;
   var domain = self.domain;
   var lineGroup = options.chart.append('g')
     .attr('transform',  self.translate(MARGIN, MARGIN));
-  
+
   var line =  d3.line()
     .curve(options.interpolation || d3.curveLinear)
     .x(function(d){return (self.xScale(self.calculateValue(d.x, domain.x)))})

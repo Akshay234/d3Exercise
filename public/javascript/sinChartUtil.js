@@ -42,6 +42,7 @@ Chart.prototype.createArea = function (options) {
     .attr('transform',  self.translate(MARGIN, MARGIN));
 
   var area = d3.area()
+    .curve(options.interpolation || d3.curveLinear)
     .x(function(d) { return self.xScale(self.calculateValue(d.x, domain.x)); })
     .y1(function(d) { return self.yScale(self.calculateValue(d.y, domain.y)); })
     .y0(INNER_HEIGHT);

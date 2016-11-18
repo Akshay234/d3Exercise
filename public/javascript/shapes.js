@@ -11,7 +11,7 @@ function calculateDistance(length) {
   return distance;
 };
 
-generateShapes = function (data) {
+var generateShapes = function (data) {
   var shapes = d3.select('.shapesContainer').append('svg');
   var keys = Object.keys(data);
   var startPosition = calculateDistance(keys.length);
@@ -56,7 +56,7 @@ var triangle = function (svg, startPoint) {
     .attr('id', 'triangle');
 };
 
-var generateShapes = function () {
+var execute = function () {
   var data = {
     line: line,
     circle: circle,
@@ -67,5 +67,5 @@ var generateShapes = function () {
 };
 
 
-window.onload = generateShapes;
+window.onload = execute;
 

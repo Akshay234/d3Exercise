@@ -40,8 +40,7 @@ Chart.prototype.createLine = function (options) {
   var domain = self.domain;
   var lineGroup = options.chart.append('g')
     .attr('transform',  self.translate(MARGIN, MARGIN));
-
-  console.log('interpolation', options.interpolation);
+  
   var line =  d3.line()
     .curve(options.interpolation || d3.curveLinear)
     .x(function(d){return (self.xScale(self.calculateValue(d.x, domain.x)))})

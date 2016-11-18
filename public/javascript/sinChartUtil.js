@@ -35,33 +35,33 @@ Chart.prototype.createDots = function (group,data) {
     });
 };
 
-Chart.prototype.createArea = function (options) {
+Chart.prototype.createArea = function (args) {
   var self = this;
   var domain = this.domain;
-  var areaGroup = options.chart.append('g')
+  var areaGroup = args.chart.append('g')
     .attr('transform',  self.translate(MARGIN, MARGIN));
 
   var area = d3.area()
-    .curve(options.interpolation || d3.curveLinear)
+    .curve(args.interpolation || d3.curveLinear)
     .x(function(d) { return self.xScale(self.calculateValue(d.x, domain.x)); })
     .y1(function(d) { return self.yScale(self.calculateValue(d.y, domain.y)); })
     .y0(INNER_HEIGHT);
 
-    areaGroup.append('path').attr('id', 'area').attr('d', area(options.data));
+    areaGroup.append('path').attr('id', 'area').attr('d', area(args.data));
 };
 
-Chart.prototype.createLine = function (options) {
+Chart.prototype.createLine = function (args) {
   var self = this;
   var domain = self.domain;
-  var lineGroup = options.chart.append('g')
+  var lineGroup = args.chart.append('g')
     .attr('transform',  self.translate(MARGIN, MARGIN));
 
   var line =  d3.line()
-    .curve(options.interpolation || d3.curveLinear)
+    .curve(args.interpolation || d3.curveLinear)
     .x(function(d){return (self.xScale(self.calculateValue(d.x, domain.x)))})
     .y(function(d){return self.yScale(self.calculateValue(d.y, domain.y))});
 
-  lineGroup.append('path').attr('id', options.id).attr('d', line(options.data));
+  lineGroup.append('path').attr('id', args.id).attr('d', line(args.data));
   return lineGroup;
 };
 

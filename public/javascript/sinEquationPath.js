@@ -1,17 +1,5 @@
-const WIDTH = 650;
-const HEIGHT = 650;
-const MARGIN = 30;
-
-const INNER_WIDTH = WIDTH - 2 * MARGIN;
-const INNER_HEIGHT = HEIGHT - 2 * MARGIN;
-
-var translate = function(x, y){
-  return 'translate('+x+','+y+')';
-};
-
-var generateSinChart = function () {
-
-  var data =  [
+var generate = function () {
+  var data = [
     {x: 0, y: 5},
     {x: 1, y: 9},
     {x: 2, y: 7},
@@ -23,58 +11,24 @@ var generateSinChart = function () {
     {x: 8, y: 3},
     {x: 9, y: 2}
   ];
-  var chart = d3.select('.container').append('svg')
-    .attr('width', WIDTH)
-    .attr('height', HEIGHT);
 
-  var xScale = d3.scaleLinear()
-    .domain([0.0, 1.0])
-    .range([0, INNER_WIDTH]);
+  var chart = new Chart();
+  var domain = {x:[0,10],y:[1,0]};
+  var svg = chart.createAxis(domain);
 
-  var yScale = d3.scaleLinear()
-    .domain([1.0, 0.0])
-    .range([0, INNER_HEIGHT]);
+  var sinData = data.map(function (v, index) {
+    var y = ((Math.sin(v.x * 3) + 1) / 2) * 10;
+    return {x: v.x, y: y};
+  });
 
+  var options = {
+    chart: svg,
+    data: sinData,
+    id: 'sinLine'
+  };
 
-  var xAxis = d3.axisBottom(xScale).ticks(12);
-  var yAxis = d3.axisLeft(yScale).ticks(10);
-
-  chart.append('g')
-    .attr('transform', translate(MARGIN, HEIGHT - MARGIN))
-    .call(xAxis)
-    .classed('xAxis', true);
-
-  chart.append('g')
-    .attr('transform', translate(MARGIN, MARGIN))
-    .call(yAxis)
-    .classed('xAxis', true);
-
-  var g = chart.append('g')
-    .attr('transform',  translate(MARGIN, MARGIN));
-
-  var line =  d3.line()
-    .x(function(d){return xScale(d.x/10)})
-    .y(function(d){
-      return yScale(((Math.sin(3*d.x)+1)/2));
-    });
-
-  g.append('path').classed('sinLine', true).attr('d', line(data));
-
-  drawDots(g, data, xScale, yScale);
+  var sinLineGroup = chart.createLine(options);
+  chart.createDots(sinLineGroup, sinData);
 };
 
-var drawDots = function (svg, data, x, y) {
-  svg.selectAll('dot')
-    .data(data)
-    .enter().append('circle')
-    .classed('dot', true)
-    .attr('r', 4)
-    .attr('cx', function(d) {
-      return x(d.x/10);
-    })
-    .attr('cy', function(d) {
-      return y((Math.sin(3*d.x)+1)/2);
-    });
-};
-
-window.onload = generateSinChart;
+window.onload = generate;

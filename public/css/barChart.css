@@ -1,6 +1,11 @@
-#barChart > div {
+.container > div {
     margin-top: 5px;
     height: 20px;
     color: white;
     text-align: end;
+}
+
+.container {
+    border: solid black;
+    padding: 10px;
 }

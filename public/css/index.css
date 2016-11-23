@@ -1,0 +1,19 @@
+#visualise {
+    text-align: center;
+}
+
+button, a {
+    border: groove;
+    padding: 12px;
+    color: black;
+    font-weight: 600;
+    border-radius: 10px;
+    font-size: large;
+    background-color: lightgray;
+    text-decoration: none;
+}
+
+button:hover, a:hover {
+    background-color: dodgerblue;
+    border: transparent;
+}

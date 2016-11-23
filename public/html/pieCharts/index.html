@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Visualisation</title>
+    <link rel="stylesheet" type="text/css" href="../../css/index.css">
+</head>
+<body>
+<center><h1>Pie Charts</h1></center>
+<div id="visualise">
+    <script type="text/javascript" src="../../javascript/d3.v4.min.js"></script>
+    <script type="text/javascript" src="../../javascript/pieCharts/pieChartUtil.js"></script>
+    <script type="text/javascript" src="../../javascript/pieCharts/create.js"></script>
+    Visualise:
+    <br><br>
+    <button onclick="createChartOf('pieChart')">Pie Chart</button>
+
+    <button onclick="createChartOf('semiPieChart')">Semi Pie Chart</button>
+
+    <button onclick="createChartOf('donutChart')">Donut Chart</button>
+
+    <button onclick="createChartOf('semiDonutChart')">Semi Donut Chart</button>
+
+</div>
+<br>
+<div class="container"></div>
+</body>
+</html>

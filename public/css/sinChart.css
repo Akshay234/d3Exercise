@@ -19,3 +19,7 @@
     stroke: none;
     fill: deepskyblue;
 }
+
+.container {
+    border: solid black;
+}

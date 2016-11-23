@@ -1,9 +1,9 @@
-#barChart {
+.container {
 	width: 1250px;
 	height: 450px;
 }
 
-#barChart div {
+.container div {
 	border-radius: 30px;
 	margin: 5px;
 	padding: 7px;

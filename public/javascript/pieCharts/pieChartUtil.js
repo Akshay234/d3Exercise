@@ -5,10 +5,7 @@ var PieChart = function (data) {
   this.data = data;
 };
 
-PieChart.prototype.translate = function (x, y, override) {
-  if (override) {
-    return 'translate(' + override.x + ',' + override.y + ')';
-  }
+PieChart.prototype.translate = function (x, y) {
   return 'translate(' + x + ',' + y + ')';
 };
 
@@ -36,7 +33,7 @@ PieChart.prototype.create = function (args) {
     .attr('width', WIDTH)
     .attr('height', HEIGHT)
     .append('g')
-    .attr('transform', self.translate(WIDTH / 2, HEIGHT / 2, args.translate));
+    .attr('transform', self.translate(WIDTH / 2, HEIGHT / 2));
 
   var arc = d3.arc()
     .outerRadius(radius - 10)

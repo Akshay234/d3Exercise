@@ -3,7 +3,7 @@
 }
 
 button, a {
-    border: groove;
+    border: solid black;
     padding: 12px;
     color: black;
     font-weight: 600;
@@ -11,9 +11,28 @@ button, a {
     font-size: large;
     background-color: lightgray;
     text-decoration: none;
+    outline: none;
+    cursor: pointer;
 }
 
 button:hover, a:hover {
     background-color: dodgerblue;
     border: transparent;
+}
+
+input {
+    border: groove;
+    padding: 6px;
+    margin: 2px;
+    color: black;
+    font-weight: 200;
+    border-radius: 5px;
+    font-size: medium;
+    background-color: lightgray;
+    outline: none;
+    cursor: pointer;
+}
+
+input:hover {
+    background-color: dodgerblue;
 }

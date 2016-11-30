@@ -1,6 +1,7 @@
 const WIDTH = 650;
 const HEIGHT = 650;
 const MARGIN = 30;
+const RECT_ALLOWANCE = 5;
 
 const INNER_WIDTH = WIDTH - 2 * MARGIN;
 const INNER_HEIGHT = HEIGHT - 2 * MARGIN;
@@ -74,12 +75,13 @@ Chart.prototype.createLine = function (args) {
 };
 
 Chart.prototype.createAxis = function (domain, overrideScale) {
+  overrideScale = overrideScale ? overrideScale : {};
   this.domain = domain;
   var chart = d3.select('.container').append('svg')
     .attr('width', WIDTH)
     .attr('height', HEIGHT);
 
-  var scale = overrideScale || d3.scaleLinear();
+  var scale = overrideScale.scale || d3.scaleLinear();
 
   var x = this.xScale = scale
     .domain(domain.x)
@@ -90,8 +92,13 @@ Chart.prototype.createAxis = function (domain, overrideScale) {
     .range([0, INNER_HEIGHT]);
 
 
-  var xAxis = d3.axisBottom(x).ticks(12);
-  var yAxis = d3.axisLeft(y).ticks(10);
+  if(overrideScale.ticks){
+    var xTicks = overrideScale.ticks.x || 12;
+    var yTicks = overrideScale.ticks.y || 10;
+  }
+
+  var xAxis = d3.axisBottom(x).ticks(xTicks);
+  var yAxis = d3.axisLeft(y).ticks(yTicks);
 
   chart.append('g')
     .attr('transform', this.translate(MARGIN, HEIGHT - MARGIN))
@@ -101,37 +108,38 @@ Chart.prototype.createAxis = function (domain, overrideScale) {
   chart.append('g')
     .attr('transform', this.translate(MARGIN, MARGIN))
     .call(yAxis)
-    .classed('xAxis', true);
+    .classed('yAxis', true);
 
   return chart;
 };
 
-Chart.prototype.createHistogram = function (data, type) {
-  var xScale = this.xScale;
-  var yScale = this.yScale;
-  var translate = this.translate;
-
-  var histogram = d3.histogram()
-    .value(function (d) {
-      return type;
-    })
-    .domain(xScale.domain());
-
-  var bars = histogram(data);
-
+Chart.prototype.createHistogram = function (data) {
+  var self = this;
   var svg = d3.select('.container').select('svg');
 
-  svg.selectAll("rect")
-    .data(bars)
-    .enter().append("rect")
-    .attr("class", "bar")
-    .attr("x", 1)
-    .attr('transform', function(d){
-      translate(MARGIN, HEIGHT- MARGIN);
-    })
-    // .attr("transform", function(d) {
-    //   return "translate(" + xScale(d) + "," + yScale(d) + ")"; })
-    .attr("width", function(d) { return xScale(d)})
-    .attr("height", function(d) { return yScale(d) });
+  var bars = svg.selectAll('rect')
+    .data(data, function (d) {
+      return d.value;
+    });
 
+  bars.enter()
+    .append('rect')
+    .attr('x', function (d, i) {
+      return self.xScale(i) + RECT_ALLOWANCE;
+    })
+    .attr('y', function (d) {
+      return self.yScale(d.value) + MARGIN;
+    })
+    .attr('height', function (d) {
+      return INNER_HEIGHT - self.yScale(d.value);
+    })
+    .attr('class', function (d) {
+      return d.type;
+    })
+    .attr('fill', 'lightblue')
+    .attr('width', 75)
+    .attr('transform', function (d) {
+      return self.translate(MARGIN, 0);
+    });
+  return bars;
 };
